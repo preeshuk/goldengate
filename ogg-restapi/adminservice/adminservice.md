@@ -1,26 +1,63 @@
-# 1. Introduction
+# Administration Service
 
-This document provides a complete reference for all write-operation REST
-API endpoints in Oracle GoldenGate 26ai. It covers every POST, PATCH,
-and PUT endpoint, documenting each JSON payload field, its type, whether
-it is required, a description, and all valid constraint/allowed values.
-For every endpoint, multiple worked JSON examples are provided
-demonstrating different payload combinations.
+## Credentials
+
+**\[POST\]** /services/v2/credentials/{domain}/{alias}
+
+**Required Role:** *Administrator* \| Create a new alias in the
+credential store.
+
+**Request Body Parameters**
+
+  
+  |**Field**    |  **Type** |  **Required** |  **Description**      | **Constraints / Allowed Values**|
+  |-------------| ----------| --------------| ----------------------| --------------------------------|
+  |\$schema     |  string   | No             | Schema discriminator    | \"ogg:credentials\"|
+  |userid       |  string   | Yes            | Database user ID (connection string) |  min 1, max 4096 chars |
+  |password     |  string   |  Yes           | Database user password |   min 1, max 1024 chars|
+
+#### Example: Replace Alias Credentials
+
+     
+     <copy>
+      {
+         \"userid\": \"ggadmin@//new-host:1521/NEWDB\",
+         \"password\": \"NewP@ss99\"
+     }
+     
+    </copy> 
+    
+## Database Connections
+
+```
+**\[POST\]** /services/v2/connections/{connection}
+```
+
+**Required Role:** *Administrator* \
+
+**Description:** Create a new database connection. Connection name follows pattern ***\"domain.alias\"***.
 
 
-**All endpoints follow the base URL pattern:**
+**Request Body Parameters**
 
-> https://\<host\>:\<port\>/services/v2/\<resource\>
+  |**Field**             | **Type** |  **Required** |  **Description**       | **Constraints / Allowed Values**     |
+  |----------------------| ---------| --------------| ---------------------- |------------------------------------|
+  |\$schema              | string   |  No           |  Schema discriminator  | \"ogg:connection\"|
+  |credentials.\$schema  | string   | No            | Credential ref discriminator | \"ogg:credentialsRef\"|
+  |credentials.domain    | string   |  Yes          |  Credential store domain name     | Default: \"OracleGoldenGate\"; max 30 chars|
+  |credentials.alias     | string   |  Yes          |  Credential store alias name | max 30 chars, pattern: \^\[a-zA-Z\]\[a-zA-Z0-9\_#\$\]\*\$|
 
-Authentication uses HTTP Basic Auth (Administrator or Operator role as
-noted per endpoint). All request and response bodies use Content-Type:
-application/json.
+  #### Example: Minimal
 
+  <copy>
+     
+     {
+      \"credentials\": { \"alias\": \"ggnorth\" }
+     }
+     
+  </copy>
 
-## 1.1 Method Summary
+## Acknowledgements
 
-  |**Method** |  **Purpose**                                                |
-  |------------ ------------------------------------------------------------|
-  |**POST**   |  Create a new resource or issue a command against an existing one.|
-  |**PATCH**  |  Partially update an existing resource (only supplied fields are changed).|
-  |**PUT**    | Replace an existing resource in its entirety.|
+* **Author** - : Preeti Shukla, Consulting Technical Writer, Oracle Corporation
+* **Last Updated By/Date** - : Preeti Shukla, May 2026

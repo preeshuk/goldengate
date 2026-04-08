@@ -1,5 +1,14 @@
 # 1. Introduction
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
+Estimated Time: TODO - x minutes
+
+
 This document provides a complete reference for all write-operation REST
 API endpoints in Oracle GoldenGate 26ai. It covers every POST, PATCH,
 and PUT endpoint, documenting each JSON payload field, its type, whether
@@ -24,3 +33,8 @@ application/json.
   |**POST**   |  Create a new resource or issue a command against an existing one.|
   |**PATCH**  |  Partially update an existing resource (only supplied fields are changed).|
   |**PUT**    | Replace an existing resource in its entirety.|
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year
