@@ -2,8 +2,9 @@
 
 **\[POST\]** /services/v2/currentuser/reauthorize
 
-**Required Role:** *Authenticated User* \| Reauthorize the current
-session (obtain a fresh token without re-login).
+**Required Role:** *Authenticated User* \
+
+**Description:** Reauthorize the current session (obtain a fresh token without re-login).
 
 **Request Body Parameters**
 
@@ -11,7 +12,7 @@ session (obtain a fresh token without re-login).
 |----------|--------|----------|-------------------------|------------------------------|
 | $schema  | string | No       | Schema discriminator    | "ogg:reauthorize"            |
 
-**Example -- Reauthorize session (no body required)**
+**Example: Reauthorize session (no body required)**
 
 ```
  {}
@@ -20,5 +21,5 @@ session (obtain a fresh token without re-login).
 
 ## Acknowledgements
 
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year
+* **Author** - : Preeti Shukla, Consulting Technical Writer, Oracle Corporation
+* **Last Updated By/Date** - : Preeti Shukla, May 2026

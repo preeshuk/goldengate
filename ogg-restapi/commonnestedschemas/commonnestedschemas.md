@@ -1,6 +1,6 @@
 # Appendix: Common Nested Schemas
 
-### A1: Credential Reference
+### Credential Reference
 ```json
 {
   "$schema": "ogg:credentialsRef",
@@ -128,5 +128,5 @@ All write operations return a standard response envelope:
 
 ## Acknowledgements
 
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year
+* **Author** - : Preeti Shukla, Consulting Technical Writer, Oracle Corporation
+* **Last Updated By/Date** - : Preeti Shukla, May 2026
