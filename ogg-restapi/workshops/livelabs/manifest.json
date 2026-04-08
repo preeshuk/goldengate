@@ -1,0 +1,71 @@
+{
+    "workshoptitle": "The Title of the Workshop is Defined in the Manifest File",
+    "include": {"starter-file.sql":"../../data-load/files/starter-file.sql",
+                "sample.json":"../../data-load/files/sample.json",
+                "step2.md":"../../data-load/files/step2.md"},
+    "variables": ["../../variables/variables.json",
+                 "../../variables/variables-in-another-file.json"],
+    "help": "livelabs-help-**enterarea**_us@oracle.com",
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "The Introduction is always first. The title and contents menu title match for the Introduction.",
+            "filename": "../../introduction/introduction.md"
+        },
+        {
+      "title": "Lab 1: Administration Service",
+      "description": "Labs that follow the introduction are numbered, starting with Lab 1",
+      "filename": "../../adminservice/adminservice.md"
+    },
+    {
+      "title": "Lab 2: Distribution Service",
+      "filename": "../../distservice/distservice.md"
+    },
+    {
+      "title": "Lab 3: Receiver Service",
+      "filename": "../../recvservice/recvservice.md"
+    },
+    {
+      "title": "Lab 4: Service Manager",
+      "filename": "../../servicemgr/servicemgr.md"
+    },
+    {
+        "title": "Lab 5: Common Configuration Settings",
+        "filename": "../../commonconfig/commonconfig.md"
+    },
+    {
+        "title": "Lab 6: Performance Metrics Service",
+            "filename": "../../perfmon/perfmon.md"
+    },
+    {
+        "title": "Lab 7: Cluster Management",
+            "filename": "../../clustermgmt/clustermgmt.md"
+    },
+    {
+        "title": "Lab 8: Plugin Templates",
+            "filename": "../../plugintemplates/plugintemplates.md"
+    },
+    {
+        "title": "Lab 9: Additional Administrative Service Endpoints",
+            "filename": "../../addladminserviceendpoints/addladminserviceendpoints.md"
+    },
+    {
+        "title": "Lab 10: User Session Endpoints",
+            "filename": "../../usersessionendpoints/usersessionendpoints.md"
+    },
+    {
+        "title": "Appendix 1: Common Nested Schemas",
+            "filename": "../../commonnestedschemas/commonnestedschemas.md"
+    },
+        {
+            "title": "Need Help?",
+            "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+            "filename":"https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+        },
+        {
+            "title": "Other LiveLabs you might like",
+            "description": "Other LiveLabs you might like",
+            "filename": "../../other-livelabs/other-livelabs.md"
+        }
+    ]
+}
