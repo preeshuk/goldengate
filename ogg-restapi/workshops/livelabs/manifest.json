@@ -1,5 +1,5 @@
 {
-    "workshoptitle": "The Title of the Workshop is Defined in the Manifest File",
+    "workshoptitle": "Oracle GoldenGate 26ai REST API Reference",
     "include": {"starter-file.sql":"../../data-load/files/starter-file.sql",
                 "sample.json":"../../data-load/files/sample.json",
                 "step2.md":"../../data-load/files/step2.md"},
@@ -13,44 +13,44 @@
             "filename": "../../introduction/introduction.md"
         },
         {
-      "title": "Lab 1: Administration Service",
+      "title": "Administration Service",
       "description": "Labs that follow the introduction are numbered, starting with Lab 1",
       "filename": "../../adminservice/adminservice.md"
     },
     {
-      "title": "Lab 2: Distribution Service",
+      "title": "Distribution Service",
       "filename": "../../distservice/distservice.md"
     },
     {
-      "title": "Lab 3: Receiver Service",
+      "title": "Receiver Service",
       "filename": "../../recvservice/recvservice.md"
     },
     {
-      "title": "Lab 4: Service Manager",
+      "title": "Service Manager",
       "filename": "../../servicemgr/servicemgr.md"
     },
     {
-        "title": "Lab 5: Common Configuration Settings",
+        "title": "Common Configuration Settings",
         "filename": "../../commonconfig/commonconfig.md"
     },
     {
-        "title": "Lab 6: Performance Metrics Service",
+        "title": "Performance Metrics Service",
             "filename": "../../perfmon/perfmon.md"
     },
     {
-        "title": "Lab 7: Cluster Management",
+        "title": "Cluster Management",
             "filename": "../../clustermgmt/clustermgmt.md"
     },
     {
-        "title": "Lab 8: Plugin Templates",
+        "title": "Plugin Templates",
             "filename": "../../plugintemplates/plugintemplates.md"
     },
     {
-        "title": "Lab 9: Additional Administrative Service Endpoints",
+        "title": "Additional Administrative Service Endpoints",
             "filename": "../../addladminserviceendpoints/addladminserviceendpoints.md"
     },
     {
-        "title": "Lab 10: User Session Endpoints",
+        "title": "User Session Endpoints",
             "filename": "../../usersessionendpoints/usersessionendpoints.md"
     },
     {
