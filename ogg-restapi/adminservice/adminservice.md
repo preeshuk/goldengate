@@ -46,9 +46,6 @@ credential store.
   |credentials.\$schema  | string   | No            | Credential ref discriminator | \"ogg:credentialsRef\"|
   |credentials.domain    | string   |  Yes          |  Credential store domain name     | Default: \"OracleGoldenGate\"; max 30 chars|
   |credentials.alias     | string   |  Yes          |  Credential store alias name | max 30 chars, pattern: \^\[a-zA-Z\]\[a-zA-Z0-9\_#\$\]\*\$|
-
-  
-  
   
   #### Example: Minimal
 
@@ -62,6 +59,31 @@ credential store.
 
   </copy>
   ```
+
+#### Example: Full with Explicit Domain and \$schema
+
+```
+<copy>
+ {
+ \"\$schema\": \"ogg:connection\",
+ \"credentials\": {
+    \"\$schema\": \"ogg:credentialsRef\",
+    \"domain\": \"OracleGoldenGate\",
+    \"alias\": \"ggsouth\"
+   }
+ }
+
+</copy>
+```
+**\[PUT\]** /services/v2/connections/{connection}
+
+**Required Role:** *Administrator* \| Replace an existing database
+connection definition.
+
+**Request Body Parameters**
+
+
+
 
 ## Acknowledgements
 
