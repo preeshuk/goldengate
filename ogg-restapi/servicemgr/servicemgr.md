@@ -135,7 +135,7 @@
 { "status": "running" }
 ```
 
-## 5.3 Authorization Profiles
+## Authorization Profiles
 
 ### **[POST]** /services/v2/deployments/{deployment}/authorization/profiles/{profile}
 
@@ -169,7 +169,7 @@
 
 ---
 
-## 5.4 Certificates
+## Certificates
 
 ### **[POST]** /services/v2/deployments/{deployment}/certificates/{type}/{certificate}
 
@@ -193,7 +193,7 @@
 
 ---
 
-## 5.5 User Management
+## User Management
 
 ### **[POST]** /services/v2/authorizations/{role}/{user}
 
@@ -218,7 +218,7 @@
 
 ---
 
-## 5.6 AI Management
+## AI Management
 
 ### **[POST]** /services/v2/installation/aiservice/providers/{provider}
 
@@ -269,21 +269,6 @@
   "enabled": true
 }
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

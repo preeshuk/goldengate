@@ -7,9 +7,9 @@ In this lab, you will be provided a complete reference for all write-operation R
 For every endpoint, multiple worked JSON examples are provided
 demonstrating different payload combinations.:
 
-|NOTE: All endpoints follow the base URL pattern:|
-----------------------------------------------------------------
-https://\<host\>:\<port\>/services/v2/\<resource\>
+  **NOTE:** All endpoints follow the base URL pattern:
+            
+    https://\<host\>:\<port\>/services/v2/\<resource\>
 
 Authentication uses HTTP Basic Auth (Administrator or Operator role as
 noted per endpoint). All request and response bodies use ***Content-Type:application/json***.

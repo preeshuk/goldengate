@@ -1,9 +1,12 @@
-# ## 4.1 Receiver Paths
+# Receiver Service
+
+## Receiver Paths
 
 ### **[POST]** /services/v2/targets/{path}
 
 **Required Role:** *Administrator*  
-**Description:* *Create a new Receiver path.
+
+**Description:** Create a new Receiver path.
 
 **Request Body Parameters**
 
@@ -22,7 +25,8 @@
 
 ---
 
-**Example**
+**Example 1: Minimal Receiver Path**
+
 ```json
 {
   "source": {
@@ -38,13 +42,55 @@
 
 ---
 
+**Example 2: Receiver path with encryption and auto-start**
+
+```
+{
+  "$schema": "ogg:recvPath",
+  "source": {
+    "host": "distrib.dc1.example.com",
+    "port": 9021,
+    "name": "ea"
+  },
+  "target": {
+    "name": "ra",
+    "path": "/opt/oracle/gg/dirdat/ra",
+    "sizeMB": 1000
+  },
+  "encryptionProfile": "aes256profile",
+  "status": "running",
+  "description": "Encrypted receiver path from DC1"
+}
+
+```
+
+---
+
 ### **[PATCH]** /services/v2/targets/{path}
+
+**Required Role:** Administrator (or Operator for status)   
+
+**Description:** Update an existing Receiver path.
+
+**Request Body Parameters**
+
 
 | Field | Type | Description |
 |------|------|------------|
 | `status` | string | running \| stopped |
 | `description` | string | Update description |
 
+---
+
+***Example 1: Start a receiver path**
+```
+{ "status": "running" }
+
+```
+---
+
+**Example 2: Stop a receiver path**
+{ "status": "stopped" }
 
 ## Acknowledgements
 

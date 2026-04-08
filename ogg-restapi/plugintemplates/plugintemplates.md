@@ -1,38 +1,64 @@
-# 1. Introduction
+# Plugin Templates
 
-### Objectives
+### \[POST\]**/services/v2/deployments/{deployment}/plugin/templates/{plugin}
 
-In this lab, you will:
-* TODO: Add objectives
+**Required Role:** *Administrator* \
 
+**Description:** Create a plugin template for an installed plugin within a deployment.
 
-Estimated Time: TODO - x minutes
+**Request Body Parameters**
 
+| Field       | Type    | Required | Description                 | Constrains / Allowed Values                  |
+|------------|---------|----------|-----------------------------|---------------------------------------------|
+| `$schema`  | string  | No       | Schema discriminator        | `"ogg:pluginTemplate"`                      |
+| config     | object  | Yes      | Plugin configuration        | Plugin-specific configuration object (schema varies per plugin) |
+| enabled    | boolean | No       | Enable plugin template      | Default: true                               |
+| description| string  | No       | Template description        | Max 4095 characters                         |
 
-This document provides a complete reference for all write-operation REST
-API endpoints in Oracle GoldenGate 26ai. It covers every POST, PATCH,
-and PUT endpoint, documenting each JSON payload field, its type, whether
-it is required, a description, and all valid constraint/allowed values.
-For every endpoint, multiple worked JSON examples are provided
-demonstrating different payload combinations.
+**Example 1: Create plugin template**
 
+```
+  {
+  "$schema": "ogg:pluginTemplate",
+  "config": {
+    "pluginSpecificParam": "value"
+  },
+  "enabled": true,
+  "description": "Custom plugin template"
+}
 
-**All endpoints follow the base URL pattern:**
+```
 
-> https://\<host\>:\<port\>/services/v2/\<resource\>
+**\[PUT\]**
+/services/v2/deployments/{deployment}/plugin/templates/{plugin}
 
-Authentication uses HTTP Basic Auth (Administrator or Operator role as
-noted per endpoint). All request and response bodies use Content-Type:
-application/json.
+**Required Role:** *Administrator* \| Replace an existing plugin
+template.
 
+**Request Body Parameters**
 
-## 1.1 Method Summary
+  ------------------------------------------------------------------------------------
+  **Field**      **Type**   **Required**   **Description**           **Constraints /
+                                                                     Allowed Values**
+  -------------- ---------- -------------- ------------------------- -----------------
+  config         object     Yes            New plugin configuration  Plugin-specific
+                                                                     configuration
+                                                                     object
 
-  |**Method** |  **Purpose**                                                |
-  |------------ ------------------------------------------------------------|
-  |**POST**   |  Create a new resource or issue a command against an existing one.|
-  |**PATCH**  |  Partially update an existing resource (only supplied fields are changed).|
-  |**PUT**    | Replace an existing resource in its entirety.|
+  enabled        boolean    No             Enable plugin template    true \| false
+
+  description    string     No             Template description      max 4095 chars
+  ------------------------------------------------------------------------------------
+
+**Example -- Replace plugin template**
+
+> {
+>
+> \"config\": { \"updatedParam\": \"updatedValue\" },
+>
+> \"enabled\": true
+>
+> }
 
 ## Acknowledgements
 
