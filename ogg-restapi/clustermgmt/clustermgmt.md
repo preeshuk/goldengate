@@ -1,40 +1,31 @@
-# 1. Introduction
+## Cluster Management
 
-### Objectives
+### **[POST]** /services/v2/installation/cluster
 
-In this lab, you will:
-* TODO: Add objectives
+| Field | Type | Required | Description |
+|------|------|----------|------------|
+| `$schema` | string | No | `"ogg:cluster"` |
+| `role` | string | Yes | primary \| standby |
+| `name` | string | Yes | Cluster name |
+| `host` | string | Yes | Host |
+| `port` | integer | Yes | Port |
 
+---
 
-Estimated Time: TODO - x minutes
+### Example
+```json
+{
+  "$schema": "ogg:cluster",
+  "name": "prod-cluster",
+  "role": "primary",
+  "host": "node1.example.com",
+  "port": 9001
+}
+```
 
-
-This document provides a complete reference for all write-operation REST
-API endpoints in Oracle GoldenGate 26ai. It covers every POST, PATCH,
-and PUT endpoint, documenting each JSON payload field, its type, whether
-it is required, a description, and all valid constraint/allowed values.
-For every endpoint, multiple worked JSON examples are provided
-demonstrating different payload combinations.
-
-
-**All endpoints follow the base URL pattern:**
-
-> https://\<host\>:\<port\>/services/v2/\<resource\>
-
-Authentication uses HTTP Basic Auth (Administrator or Operator role as
-noted per endpoint). All request and response bodies use Content-Type:
-application/json.
-
-
-## 1.1 Method Summary
-
-  |**Method** |  **Purpose**                                                |
-  |------------ ------------------------------------------------------------|
-  |**POST**   |  Create a new resource or issue a command against an existing one.|
-  |**PATCH**  |  Partially update an existing resource (only supplied fields are changed).|
-  |**PUT**    | Replace an existing resource in its entirety.|
 
 ## Acknowledgements
 
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year
+* **Author** - : Preeti Shukla, Consulting Technical Writer, Oracle Corporation
+* **Last Updated By/Date** - : Preeti Shukla, May 2026
+

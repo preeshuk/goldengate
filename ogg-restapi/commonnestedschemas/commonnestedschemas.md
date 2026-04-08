@@ -1,38 +1,130 @@
-# 1. Introduction
+# Appendix: Common Nested Schemas
 
-### Objectives
+### A1: Credential Reference
+```json
+{
+  "$schema": "ogg:credentialsRef",
+  "domain": "OracleGoldenGate",
+  "alias": "<aliasName>"
+}
+```
 
-In this lab, you will:
-* TODO: Add objectives
+---
 
+### Begin Variants
 
-Estimated Time: TODO - x minutes
+```json
+// Variant 1 -- Start from now
+"begin": "now"
 
+// Variant 2 -- Start from ISO-8601 timestamp
+"begin": "2025-06-01T00:00:00.000Z"
 
-This document provides a complete reference for all write-operation REST
-API endpoints in Oracle GoldenGate 26ai. It covers every POST, PATCH,
-and PUT endpoint, documenting each JSON payload field, its type, whether
-it is required, a description, and all valid constraint/allowed values.
-For every endpoint, multiple worked JSON examples are provided
-demonstrating different payload combinations.
+// Variant 3 -- Oracle SCN (integer)
+"begin": {
+  "$schema": "type:position/atDbms",
+  "at": {
+    "csn": 6488359
+  }
+}
 
+// Variant 4 -- Trail RBA position (Replicat/Distribution)
+"begin": {
+  "$schema": "type:position/atTrailRBA",
+  "sequence": 100,
+  "offset": 4096
+}
+```
 
-**All endpoints follow the base URL pattern:**
+---
 
-> https://\<host\>:\<port\>/services/v2/\<resource\>
+### Managed Process Settings
 
-Authentication uses HTTP Basic Auth (Administrator or Operator role as
-noted per endpoint). All request and response bodies use Content-Type:
-application/json.
+```json
+{
+  "$schema": "ogg:managedProcessSettings",
+  "autoStart": { "enabled": true, "delay": 0 },
+  "autoRestart": {
+    "enabled": true,
+    "delay": 30,
+    "retries": 9,
+    "window": 60,
+    "disableOnFailure": true
+  }
+}
+```
 
+---
 
-## 1.1 Method Summary
+## OCI Archive Target Authentication Variants
 
-  |**Method** |  **Purpose**                                                |
-  |------------ ------------------------------------------------------------|
-  |**POST**   |  Create a new resource or issue a command against an existing one.|
-  |**PATCH**  |  Partially update an existing resource (only supplied fields are changed).|
-  |**PUT**    | Replace an existing resource in its entirety.|
+```
+// Variant 1 -- Profile
+"authentication": {
+  "profile": "DEFAULT"
+}
+
+// Variant 2 -- Instance Principal
+"authentication": {
+  "instancePrincipal": true
+}
+
+// Variant 3 -- API Signing Key
+"authentication": {
+  "tenancyId": "ocid1.tenancy.oc1...",
+  "userId": "ocid1.user.oc1...",
+  "apiSigningKey": "-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE KEY-----",
+  "apiSigningKeyFingerprint": "aa:bb:cc:dd:ee:ff:00:11:22:33:44:55:66:77:88:99"
+}
+
+```
+---
+
+## S3-Compatible Archive Target
+
+```
+{
+  "bucketName": "my-gg-archive-bucket",
+  "region": "us-east-1",
+  "authentication": {
+    "accessKeyId": "AKIAIOSFODNN7EXAMPLE",
+    "secretKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+  }
+}
+
+```
+
+---
+
+### Standard API Response
+
+All write operations return a standard response envelope:
+
+```json
+{
+  "$schema": "api:standardResponse",
+  "response": { /* created/updated resource object */ },
+  "messages": [
+    {
+      "$schema": "ogg:message",
+      "type": "https://goldengate.oracle.com/messages/OGG-00001",
+      "title": "Process created successfully.",
+      "code": "OGG-00001",
+      "severity": "INFO",
+      "issued": "2026-04-02T10:30:00.000Z"
+    }
+  ],
+  "links": [
+    {
+      "$schema": "ogg:link",
+      "rel": "self",
+      "href": "https://host:9011/services/v2/extracts/EXT1",
+      "mediaType": "application/json"
+    }
+  ]
+}
+
+```
 
 ## Acknowledgements
 
