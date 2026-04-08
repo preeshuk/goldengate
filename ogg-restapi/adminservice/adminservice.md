@@ -47,15 +47,21 @@ credential store.
   |credentials.domain    | string   |  Yes          |  Credential store domain name     | Default: \"OracleGoldenGate\"; max 30 chars|
   |credentials.alias     | string   |  Yes          |  Credential store alias name | max 30 chars, pattern: \^\[a-zA-Z\]\[a-zA-Z0-9\_#\$\]\*\$|
 
+  
+  
+  
   #### Example: Minimal
 
+  ```
   <copy>
      
-     {
-      \"credentials\": { \"alias\": \"ggnorth\" }
-     }
-     
+  {
+    \"credentials\": { 
+      \"alias\": \"ggnorth\" }
+  }
+
   </copy>
+  ```
 
 ## Acknowledgements
 
