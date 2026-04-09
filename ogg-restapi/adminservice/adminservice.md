@@ -2,7 +2,7 @@
 
 ## Credentials
 
-**\[POST\]** /services/v2/credentials/{domain}/{alias}
+### **\[POST\]** /services/v2/credentials/{domain}/{alias}
 
 **Required Role:** *Administrator* \| Create a new alias in the
 credential store.
@@ -10,13 +10,56 @@ credential store.
 **Request Body Parameters**
 
   
-  |**Field**    |  **Type** |  **Required** |  **Description**      | **Constraints / Allowed Values**|
+  |Field    |  Type |  Required |  Description      | Constraints / Allowed Values|
   |-------------| ----------| --------------| ----------------------| --------------------------------|
-  |\$schema     |  string   | No             | Schema discriminator    | \"ogg:credentials\"|
-  |userid       |  string   | Yes            | Database user ID (connection string) |  min 1, max 4096 chars |
-  |password     |  string   |  Yes           | Database user password |   min 1, max 1024 chars|
+  |`$schema`     |  string   | No             | Schema discriminator    | "ogg:credentials"|
+  |`userid`       |  string   | Yes            | Database user ID (connection string) |  min 1, max 4096 chars |
+  |`password`     |  string   |  Yes           | Database user password |   min 1, max 1024 chars|
 
-#### Example: Replace Alias Credentials
+---
+
+**Example 1: Minimal (userid + password)**
+  
+  ```
+    {
+      "userid": "ggadmin@//db-host:1521/ORCLCDB",
+      "password": "Welcome1#"
+    }
+  
+  ```
+
+---
+
+**Example 2: With $schema discriminator** 
+
+  ```
+   {
+    "$schema": "ogg:credentials",
+    "userid": "c##ggadmin@//server1.dc1.example.com:1521/ORCLCDB",
+    "password": "P@ssw0rd_DB_A1"
+   }
+
+  ```
+
+---
+
+### **\[PUT\]** /services/v2/credentials/{domain}/{alias}
+
+**Required Role:** Administrator   
+
+**Description:** Replace (fully update) an existing alias in the credential store. Same payload as POST.
+
+**Request Body Parameters**
+
+| Field    | Type   | Required | Description                               | Constraints / Allowed Values |
+|----------|--------|----------|-------------------------------------------|------------------------------|
+| `$schema`  | string | No       | Schema discriminator                      | "ogg:credentials"            |
+| `userid`   | string | Yes      | Database user ID (connection string)      | min 1, max 4096 chars        |
+| `password` | string | Yes      | Database user password                    | min 1, max 1024 chars        |
+
+---
+
+**Example: Replace Alias Credentials**
 
      
      <copy>
@@ -26,12 +69,12 @@ credential store.
      }
      
     </copy> 
-    
+
+---    
+
 ## Database Connections
 
-```
-**\[POST\]** /services/v2/connections/{connection}
-```
+### **\[POST\]** /services/v2/connections/{connection}
 
 **Required Role:** *Administrator* \
 
@@ -47,7 +90,7 @@ credential store.
   |credentials.domain    | string   |  Yes          |  Credential store domain name     | Default: \"OracleGoldenGate\"; max 30 chars|
   |credentials.alias     | string   |  Yes          |  Credential store alias name | max 30 chars, pattern: \^\[a-zA-Z\]\[a-zA-Z0-9\_#\$\]\*\$|
   
-  #### Example: Minimal
+  **Example 1: Minimal**
 
   ```
   <copy>
@@ -60,35 +103,38 @@ credential store.
   </copy>
   ```
 
-#### Example: Full with Explicit Domain and \$schema
-
-```
-<copy>
- {
- \"\$schema\": \"ogg:connection\",
- \"credentials\": {
-    \"\$schema\": \"ogg:credentialsRef\",
-    \"domain\": \"OracleGoldenGate\",
-    \"alias\": \"ggsouth\"
+---
+ 
+ ***Example 2: Full with Explicit Domain and \$schema**
+ 
+ ```
+  <copy>
+   {
+     \"\$schema\": \"ogg:connection\",
+     \"credentials\": {
+     \"\$schema\": \"ogg:credentialsRef\",
+     \"domain\": \"OracleGoldenGate\",
+     \"alias\": \"ggsouth\"
+    }
    }
- }
 
 </copy>
+
 ```
+
 **\[PUT\]** /services/v2/connections/{connection}
 
 **Required Role:** *Administrator* \
 
-**Description:** Replace an existing database
-connection definition.
+**Description:** Replace an existing database connection definition.
 
 **Request Body Parameters**
 
   |**Field**        |    **Type**  |  **Required**  | **Description** |        **Constraints /Allowed Values**|
   |------------------|-- ---------- -|------------- ---|------------------|-- --------------------------------------|
-  |\$schema         |    string    | No             | Schema discriminator  |   \"ogg:connection\" |
-  |credentials.domain |   string   |  Yes           | Credential store domain name | Default: \"OracleGoldenGate\"|
-  |credentials.alias  |  string    | Yes            | Credential store alias name | max 30 chars |
+  |`$schema`         |    string    | No             | Schema discriminator  |   "ogg:connection" |
+  |`credentials.domain` |   string   |  Yes           | Credential store domain name | Default: "OracleGoldenGate"|
+  |`credentials.alias`  |  string    | Yes            | Credential store alias name | max 30 chars |
 
 
 **Example:  Replace connection**
@@ -96,47 +142,57 @@ connection definition.
 ```
  {
 
-  \"credentials\": {
-    \"domain\": \"OracleGoldenGate\",
-    \"alias\": \"ggeast\"
+  "credentials": {
+    "domain": "OracleGoldenGate",
+    "alias": "ggeast"
    }
  }
 
 ```
+---
 
 **\[POST\]** /services/v2/connections/{connection}/tables/heartbeat
 
 **Required Role:** *Administrator* \
+
 **Description:** Create a heartbeat table for the specified database connection.
 
 **Request Body Parameters**
 
 |**Field**   |   **Type**  | **Required** |  **Description**  | **Constraints /Allowed Values**|
   |-------------|- ---------- -|------------- -|------------------- |----------------------------------------------- |
-  |schema       |  string      | No            | Database schema to create heartbeat table in | If omitted, default schema is used|
-  |table        |  string      | No            | Table name override for heartbeat table |   Defaults to OGG_HEARTBEAT |
+  |`schema`       |  string      | No            | Database schema to create heartbeat table in | If omitted, default schema is used|
+  |`table`        |  string      | No            | Table name override for heartbeat table |   Defaults to OGG_HEARTBEAT |
 
 
 **Example 1 -- Default heartbeat table**
-
-> {}
+ 
+  ```json
+    {}
+  
+  ```
+---
 
 **Example 2 -- Custom schema and table name**
+ 
+ ```json
+   {
+   
+     "schema": "GGADMIN",
+     "table": "GG_HEARTBEAT_PROD"
+   }
 
-> {
->
-> \"schema\": \"GGADMIN\",
->
-> \"table\": \"GG_HEARTBEAT_PROD\"
->
-> }
+  ```
+---
 
-**\[POST\]** /services/v2/connections/{connection}/trandata/table
+### **\[POST\]** /services/v2/connections/{connection}/trandata/table
 
-**Required Role:** *Administrator* \| Manage supplemental logging for a
-specific table.
+**Required Role:** *Administrator* 
+
+**Description:** Manage supplemental logging for a specific table.
 
 **Request Body Parameters**
+
   |**Field**    |  **Type** |  **Required** |  **Description**  |         **Constraints /|Allowed Values**|
   -------------- ---------- -------------- ------------------------- -------------------------------------
   |schemaTable  |  string   |  Yes          |  Schema.Table to enable supplemental logging on  |  Pattern: SCHEMA.TABLE or SCHEMA.\*|
@@ -146,13 +202,15 @@ specific table.
 
 **Example: Enable minimum supplemental logging**
 
-> {
->
-> \"schemaTable\": \"HR.EMPLOYEES\",
->
-> \"enabled\": true
->
-> }
+```json
+
+  {
+ 
+    "schemaTable": "HR.EMPLOYEES",
+    "enabled": true
+  }
+
+```
 
 **Example: Enable with all columns**
 
@@ -168,13 +226,16 @@ specific table.
 
 **Example: Disable supplemental logging**
 
-> {
+```
+ {
 >
 > \"schemaTable\": \"HR.EMPLOYEES\",
 >
 > \"enabled\": false
 >
 > }
+
+```
 
 ## Extracts
 
