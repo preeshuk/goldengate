@@ -529,16 +529,6 @@ Create a new trail definition (2-character name).
 |------|------|----------|------------|
 | `command` | string | Yes | START \| STOP \| KILL |
 
----
-
-
-
-
-
-
-
-
-
 
 
 
