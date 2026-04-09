@@ -28,39 +28,34 @@
 }
 
 ```
+---
 
-**\[PUT\]**
-/services/v2/deployments/{deployment}/plugin/templates/{plugin}
+### \[PUT\]**/services/v2/deployments/{deployment}/plugin/templates/{plugin}
 
-**Required Role:** *Administrator* \| Replace an existing plugin
-template.
+**Required Role:** *Administrator* \
+
+**Description:** Replace an existing plugin template.
 
 **Request Body Parameters**
 
-  ------------------------------------------------------------------------------------
-  **Field**      **Type**   **Required**   **Description**           **Constraints /
-                                                                     Allowed Values**
-  -------------- ---------- -------------- ------------------------- -----------------
-  config         object     Yes            New plugin configuration  Plugin-specific
-                                                                     configuration
-                                                                     object
+| Field       | Type    | Required | Description               | Constraints / Allowed Values      |
+|-------------|---------|----------|---------------------------|-------------------------------------|
+| config      | object  | Yes      | New plugin configuration  | Plugin-specific configuration object|
+| enabled     | boolean | No       | Enable plugin template    | true \| false                       |
+| description | string  | No       | Template description      | max 4095 chars                      |
+  
+**Example: Replace plugin template**
 
-  enabled        boolean    No             Enable plugin template    true \| false
-
-  description    string     No             Template description      max 4095 chars
-  ------------------------------------------------------------------------------------
-
-**Example -- Replace plugin template**
-
-> {
->
-> \"config\": { \"updatedParam\": \"updatedValue\" },
->
-> \"enabled\": true
->
-> }
+```
+    {
+  "config": {
+    "updatedParam": "updatedValue"
+    },
+     "enabled": true
+   }
+```
 
 ## Acknowledgements
 
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year
+* **Author** - : Preeti Shukla, Consulting Technical Writer, Oracle Corporation
+* **Last Updated By/Date** - : Preeti Shukla, May 2026
