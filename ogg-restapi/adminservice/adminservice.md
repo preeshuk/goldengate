@@ -195,10 +195,10 @@ credential store.
 
   |**Field**    |  **Type** |  **Required** |  **Description**  |         **Constraints /|Allowed Values**|
   -------------- ---------- -------------- ------------------------- -------------------------------------
-  |schemaTable  |  string   |  Yes          |  Schema.Table to enable supplemental logging on  |  Pattern: SCHEMA.TABLE or SCHEMA.\*|
-  | enabled     |   boolean |   Yes         |  Enable (true) or disable  true \| false | (false) supplemental logging |
-  |allColumns    | boolean    |No             |Enable supplemental logging on all columns     |Default: false|
-  |keyColumns    | array      |No          | List of additional key column names |  Array of strings|
+  | `schemaTable`  |  string   |  Yes          |  Schema.Table to enable supplemental logging on  |  Pattern: SCHEMA.TABLE or SCHEMA.\*|
+  | `enabled`     |   boolean |   Yes         |  Enable (true) or disable  true \| false | (false) supplemental logging |
+  | `allColumns`    | boolean    |No             |Enable supplemental logging on all columns     |Default: false|
+  | `keyColumns`    | array      |No          | List of additional key column names |  Array of strings|
 
 **Example: Enable minimum supplemental logging**
 
@@ -214,26 +214,24 @@ credential store.
 
 **Example: Enable with all columns**
 
-> {
->
-> \"schemaTable\": \"SALES.ORDERS\",
->
-> \"enabled\": true,
->
-> \"allColumns\": true
->
-> }
+```json
+{
+
+ "schemaTable": "SALES.ORDERS",
+ "enabled": true,
+ "allColumns": true
+}
+
+```
 
 **Example: Disable supplemental logging**
 
-```
- {
->
-> \"schemaTable\": \"HR.EMPLOYEES\",
->
-> \"enabled\": false
->
-> }
+```json
+{
+
+  "schemaTable": "HR.EMPLOYEES",
+  "enabled": false
+}
 
 ```
 
@@ -472,6 +470,7 @@ Create a new trail definition (2-character name).
 ```
 
 #### Example 2 — Full definition
+
 ```json
 {
   "$schema": "ogg:trail",
@@ -491,9 +490,12 @@ Create a new trail definition (2-character name).
 | `sizeMB` | integer | Update max file size | 1–2000 |
 | `description` | string | Update description | max 4095 chars |
 
-#### Example
+#### Example 1
+
 ```json
+
 { "sizeMB": 2000 }
+
 ```
 
 ---
@@ -504,11 +506,13 @@ Create a new trail definition (2-character name).
 
 **Required Role:** *Administrator*
 
+**Description:**  Create a new automated task (for example, trail archival).
+
 **Request Body Parameters**
 
-| Field | Type | Required | Description | Constraints |
-|------|------|----------|------------|------------|
-| `$schema` | string | No | Schema discriminator | `"ogg:task"` |
+| Field | Type | Required | Description | Constraints / Allowed Values |
+|------|------|----------|------------|--------------------------------|
+| `$schema` | string | No | Schema discriminator | `"ogg:task"` | 
 | `type` | string | Yes | Task type | `"archive"` \| `"purge"` |
 | `enabled` | boolean | No | Enable task | Default: true |
 | `schedule` | string | Yes | Cron schedule | e.g. `"0 * * * *"` |
@@ -516,9 +520,8 @@ Create a new trail definition (2-character name).
 | `description` | string | No | Description | max 4095 chars |
 
 
-**Examples**
+**Examples 1: Trail archive task (OCI bucket)**
 
-#### Archive task
 ```json
 {
   "$schema": "ogg:task",
@@ -529,24 +532,32 @@ Create a new trail definition (2-character name).
 }
 ```
 
-#### Purge task
+**Example 2 -- Trail purge task**
+
 ```json
 {
   "$schema": "ogg:task",
   "type": "purge",
   "enabled": true,
   "schedule": "0 4 * * 0",
-  "description": "Weekly purge"
+  "description": "Weekly purge of old trail files"
 }
+
 ```
 
 #### **[PATCH]** /services/v2/tasks/{task}
 
-| Field | Type | Description |
-|------|------|------------|
-| `enabled` | boolean | Enable/disable |
-| `schedule` | string | Update cron |
-| `description` | string | Update description |
+**Required Role:** *Administrator* 
+
+**Description:** Update an existing task.
+
+**Request Body Parameters**
+
+| Field | Type | Description || Constraints / Allowed Values |
+|------|------|----------|------------|--------------------------------|
+| `enabled` | boolean | No | Enable or disable task | true \| false
+| `schedule` | string | No | Update schedule | Cron format string
+| `description` | string | No | Update description | max 4095 chars
 
 ---
 
@@ -563,11 +574,15 @@ Create a new trail definition (2-character name).
 ### Examples
 
 ```json
+
 { "command": "INFO ALL" }
+
 ```
 
 ```json
-{ "command": "SEND EXTRACT EXT1, STATUS" }
+
+ {"command": "SEND EXTRACT EXT1, STATUS" }
+
 ```
 
 ---
@@ -589,9 +604,6 @@ Create a new trail definition (2-character name).
 | Field | Type | Required | Description |
 |------|------|----------|------------|
 | `command` | string | Yes | START \| STOP \| KILL |
-
-
-
 
 ## Acknowledgements
 
